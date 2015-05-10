@@ -8,7 +8,7 @@ plot1 <- function(){
     subdf <- subset(df, df$Global_active_power != '?')
     gapower <- (df$Global_active_power)
     png(filename="plot1.png", width=480, height=480, bg="white")
-    hist(as.numeric(gapower),xlab="Global Active Power (kilowatts)", ylab="Frequency",main="Global Active Power",col="lightblue")
+    hist(as.numeric(gapower),xlab="Global Active Power (kilowatts)", ylab="Frequency",main="Global Active Power",col="red")
 
     #IMPORTANT, close the device!
     dev.off()

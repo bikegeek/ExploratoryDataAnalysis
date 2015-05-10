@@ -8,13 +8,16 @@ plot3<-function(){
     #than NA. Convert the Global active power data to character first.
     df$Global<- as.character(df$Global_active_power)
     subdf <- subset(df, df$Global_active_power != '?')
+
     #Combine the date and time to get the complete date...
     as.Date(subdf$Date,format="%d/%m%y")
     Sys.timezone()
     dateTime <- (paste(subdf$Date, subdf$Time,sep=" "))
     subdf$DateTime<-dmy_hms(dateTime,tz=Sys.timezone())
+
     #Open the device
     png(filename="plot3.png", width=480, height=480, bg="white")
+
     #Get the maximum xrange
     x1range <- range(subdf$Sub_metering_1)
     x2range <- range(subdf$Sub_metering_2)
@@ -33,6 +36,8 @@ plot3<-function(){
 
     #Get the yrange
     yrange <- range(subdf$DateTime)
+
+    #Line colors
     colors<-c("black","red","green")
 
     plot(yrange,maxX,type="n",xlab="",ylab="Energy sub metering")
@@ -42,10 +47,13 @@ plot3<-function(){
 
     #Line names
     group<-c("Sub_metering_1","Sub_metering_2","Sub_metering_3")
+
     #Line types=1, solid
     lt<-c(1,1,1)
+
     #add legend
     legend(x="topright",legend=group,lty=lt,col=colors)
+
     #Don't forget to close the device!!!
     dev.off()
 
